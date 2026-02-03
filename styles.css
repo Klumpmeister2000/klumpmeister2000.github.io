@@ -116,13 +116,13 @@ header {
 }
 
 .image-container {
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
     border-radius: var(--radius-round);
-    margin-top: 15%;
+    margin-top: 10%;
     overflow: hidden;
     /* Subtle shadow for depth */
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);
 }
 
 .image-container img {
@@ -132,9 +132,13 @@ header {
 }
 
 h1 {
-    font-size: 20px;
+    font-size: 28px;
     margin-bottom: var(--spacing-lg);
-    font-weight: bolder;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 20px;
     /* Animation */
     animation: fadeInUp var(--transition-medium) ease-out;
     animation-delay: 0.1s;
@@ -241,13 +245,14 @@ label {
 /* Small phones (less than 360px) */
 @media (max-width: 360px) {
     .image-container {
-        height: 80px;
-        width: 80px;
-        margin-top: 20%;
+        height: 140px;
+        width: 140px;
+        margin-top: 15%;
     }
 
     h1 {
         font-size: 18px;
+        letter-spacing: 0.5px;
     }
 
     .tile {
@@ -268,13 +273,13 @@ label {
 /* Tablets and larger phones (600px and up) */
 @media (min-width: 600px) {
     .image-container {
-        height: 120px;
-        width: 120px;
-        margin-top: 10%;
+        height: 220px;
+        width: 220px;
+        margin-top: 8%;
     }
 
     h1 {
-        font-size: 24px;
+        font-size: 32px;
     }
 
     .tile {
@@ -289,13 +294,13 @@ label {
 /* Desktop (900px and up) */
 @media (min-width: 900px) {
     .image-container {
-        height: 140px;
-        width: 140px;
-        margin-top: 5%;
+        height: 250px;
+        width: 250px;
+        margin-top: 4%;
     }
 
     h1 {
-        font-size: 28px;
+        font-size: 36px;
         margin-bottom: 40px;
     }
 
