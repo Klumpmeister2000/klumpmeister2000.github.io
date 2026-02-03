@@ -1,12 +1,114 @@
+/* ========================================
+   CSS CUSTOM PROPERTIES (Variables)
+   ========================================
+   Define colors and values once, reuse everywhere.
+   To change your theme, just edit these values!
+*/
+:root {
+    --bg-primary: rgb(10, 10, 10);
+    --bg-tile: rgb(37, 37, 37);
+    --bg-tile-hover: rgb(50, 50, 50);
+    --bg-share-button: rgb(52, 52, 52);
+    --text-primary: rgb(240, 240, 240);
+    --text-secondary: rgb(200, 200, 200);
 
+    /* Spacing - consistent throughout */
+    --spacing-sm: 8px;
+    --spacing-md: 15px;
+    --spacing-lg: 30px;
+
+    /* Animation timing */
+    --transition-fast: 0.2s;
+    --transition-medium: 0.3s;
+
+    /* Border radius */
+    --radius-sm: 15px;
+    --radius-round: 50%;
+}
+
+/* ========================================
+   ANIMATIONS
+   ========================================
+   @keyframes defines the animation sequence.
+   'from' is the starting state, 'to' is the end.
+*/
+
+/* Fade in and slide up - used for the whole page */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale in with fade - used for profile image */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Staggered slide in from left - used for tiles */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========================================
+   BASE STYLES
+   ========================================
+*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+}
+
+/* ========================================
+   HEADER & PROFILE
+   ========================================
+*/
 header {
-
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Animation: fade in and scale */
+    animation: scaleIn var(--transition-medium) ease-out;
 }
 
 .container {
     width: 91%;
     max-width: 680px;
-    margin: 10px;
+    margin: var(--spacing-sm);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,80 +118,222 @@ header {
 .image-container {
     height: 100px;
     width: 100px;
-    border-radius: 50px;
-    margin-top: 20%;
+    border-radius: var(--radius-round);
+    margin-top: 15%;
     overflow: hidden;
-}
-
-h1 {
-    font-size: 20px;
-    margin-bottom: 30px;
-    font-weight: bolder;
-}
-
-.tile {
-    width: 90%;
-    background-color: rgb(37, 37, 37);
-    margin: 15px;
-    border-radius: 15px 0 15px 15px;
-    display: flex;
-    justify-content: space-between;
-    text-decoration: none;
-}
-
-label {
-    padding: auto;
-    margin-top: 15px;
-    font-size: larger;
-    color:white
-}
-
-
-.tile:hover {
-    transition: cubic-bezier(.07, 1.41, .82, 1.41) 0.2s;
-    transform: scale(1.02);
-}
-
-.tile-share-button {
-    margin: 8px;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px 0 20px 20px;
-    background-color: rgb(52, 52, 52);
+    /* Subtle shadow for depth */
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
 .image-container img {
     height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
-.icon  {
-    margin: 5px 5px 5px;
-    width: 44px;
-    height: 44px;
-    margin-top: 5px;
-    margin-left: 5px;
+h1 {
+    font-size: 20px;
+    margin-bottom: var(--spacing-lg);
+    font-weight: bolder;
+    /* Animation */
+    animation: fadeInUp var(--transition-medium) ease-out;
+    animation-delay: 0.1s;
+    animation-fill-mode: both;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    background-color: rgb(10, 10, 10);
-    color: rgb(240, 240, 240);
+/* ========================================
+   TILES (Social Links)
+   ========================================
+   Each tile gets a staggered animation delay
+   using nth-child selector
+*/
+.tile {
+    width: 90%;
+    max-width: 680px;
+    background-color: var(--bg-tile);
+    margin: var(--spacing-md);
+    border-radius: var(--radius-sm) 0 var(--radius-sm) var(--radius-sm);
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;
-    width: 100vw;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: none;
+    /* Smooth transition for hover effects */
+    transition: transform var(--transition-fast) cubic-bezier(.07, 1.41, .82, 1.41),
+                background-color var(--transition-fast) ease;
+    /* Animation */
+    animation: slideInLeft var(--transition-medium) ease-out;
+    animation-fill-mode: both;
 }
 
-.share-button {
+/* Staggered animation delays for each tile */
+.tile:nth-child(1) { animation-delay: 0.15s; }
+.tile:nth-child(2) { animation-delay: 0.25s; }
+.tile:nth-child(3) { animation-delay: 0.35s; }
+.tile:nth-child(4) { animation-delay: 0.45s; }
+.tile:nth-child(5) { animation-delay: 0.55s; }
+
+.tile:hover {
+    transform: scale(1.02);
+    background-color: var(--bg-tile-hover);
+}
+
+/* Active/click state */
+.tile:active {
+    transform: scale(0.98);
+}
+
+label {
+    padding: auto;
+    margin-top: var(--spacing-md);
+    font-size: larger;
+    color: var(--text-primary);
+    /* Make the label not block clicks */
+    pointer-events: none;
+    /* Better text rendering */
+    -webkit-font-smoothing: antialiased;
+}
+
+.tile-share-button {
+    margin: var(--spacing-sm);
     width: 40px;
     height: 40px;
-    border-radius: 20px;
-    background-color: rgb(240, 240, 240);
+    border-radius: 20px 0 20px 20px;
+    background-color: var(--bg-share-button);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Smooth hover transition */
+    transition: background-color var(--transition-fast) ease;
 }
 
-.share-button svg {
-    margin-top: 2px;
-    color: rgb(0, 0, 0);
+.tile:hover .tile-share-button {
+    background-color: rgb(70, 70, 70);
+}
+
+.tile-share-button svg {
+    fill: var(--text-secondary);
+    width: 20px;
+    height: 20px;
+}
+
+.icon {
+    margin: 5px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (Media Queries)
+   ========================================
+   Mobile-first approach: base styles are for mobile,
+   then we enhance for larger screens
+*/
+
+/* Small phones (less than 360px) */
+@media (max-width: 360px) {
+    .image-container {
+        height: 80px;
+        width: 80px;
+        margin-top: 20%;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .tile {
+        width: 95%;
+        margin: 10px;
+    }
+
+    label {
+        font-size: medium;
+    }
+
+    .icon {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+/* Tablets and larger phones (600px and up) */
+@media (min-width: 600px) {
+    .image-container {
+        height: 120px;
+        width: 120px;
+        margin-top: 10%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .tile {
+        padding: 5px;
+    }
+
+    label {
+        font-size: x-large;
+    }
+}
+
+/* Desktop (900px and up) */
+@media (min-width: 900px) {
+    .image-container {
+        height: 140px;
+        width: 140px;
+        margin-top: 5%;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    .tile {
+        padding: 8px;
+        margin: 12px;
+    }
+
+    .icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Large desktop (1200px and up) */
+@media (min-width: 1200px) {
+    .image-container {
+        margin-top: 3%;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ========================================
+   Respect user's motion preferences
+*/
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+.tile:focus {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
 }
